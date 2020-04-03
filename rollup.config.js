@@ -17,10 +17,6 @@ module.exports = {
     {
       file: pkg.module,
       format: 'esm'
-    },
-    {
-      file: pkg.browser,
-      format: 'iife'
     }
   ],
   external: [

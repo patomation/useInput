@@ -1,21 +1,29 @@
-import React, { ReactNode, FunctionComponent } from 'react'
+import { useState } from 'react'
 
-export interface Props {
-  children?: [ReactNode] | ReactNode
-  className?: string
-  style?: object
-}
+export type Value = string | number
 
-export const MyComponent: FunctionComponent<Props> = ({
-  children,
-  className,
-  style
-}: Props) => {
-  return (
-    <div
-      className={className}
-      style={{ ...style }}>
-      { children }
-    </div>
-  )
+export type UseInput = (initialValue: Value) => [{
+  value: Value
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+},
+React.Dispatch<React.SetStateAction<Value>>
+]
+
+export const useInput: UseInput = (initialValue = '') => {
+  // Set value to state and de-structure value and setter
+  const [value, setValue] = useState(initialValue)
+
+  // Handle input change
+  const onChange = (e): void => {
+    setValue(e.target.value)
+  }
+
+  // return array with input prop object and setter
+  return [
+    {
+      value, // Input value prop
+      onChange // Input on change handler
+    },
+    setValue // Allow Dispatching to set state
+  ]
 }
