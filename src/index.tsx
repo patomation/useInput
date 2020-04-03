@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 export type Value = string | number
 
-export type UseInput = (initialValue: Value) => [{
+export type UseInput = (initialValue?: Value) => [{
   value: Value
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 },
